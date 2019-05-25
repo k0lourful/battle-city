@@ -13,12 +13,11 @@ protected:
     enum Direction { Up, Down, Left, Right, } mDir;
 
     float mSpeed;
+    float mCurrentFrame;
 
     sf::String mFile;
     sf::Texture mTexture;
     sf::Sprite mSprite;
-
-    float mCurrentFrame;
 
 public:
     explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file);
