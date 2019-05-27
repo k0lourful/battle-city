@@ -2,38 +2,60 @@
 #include <Application.h>
 
 Application::Application()
-    : mWindow(sf::VideoMode(1280,720), "Battle City"), gameOver(false) {
+    : mWindow(sf::VideoMode(960, 720), "Battle City"), gameOver(false) {
 
-    srand(std::time(NULL));
-    mWindow.setFramerateLimit(60);
+    const sf::Time timePerFrame = sf::seconds(1.f / 60.f);
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
     sf::Clock clock;
     while (mWindow.isOpen()) {
-        time = clock.getElapsedTime().asMicroseconds() / 800;
-        clock.restart();
+        timeSinceLastUpdate += clock.restart();
 
-        sf::Event event;
-        while (mWindow.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                mWindow.close();
-
-            if (event.type == sf::Event::KeyPressed)
-                if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Down ||
-                    event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right)
-                    player.move(event);
+        while (timeSinceLastUpdate > timePerFrame) {
+            timeSinceLastUpdate -= timePerFrame;
+            process_events();
+            update(timePerFrame);
         }
-
-        if (!gameOver)
-            update(time);
-
         render();
     }
 }
 
-void Application::update(const float &time) {}
+void Application::process_events() {
+    sf::Event event;
+    while (mWindow.pollEvent(event)) {
+        switch (event.type) {
+            case sf::Event::KeyPressed:
+                mPlayer.handle_input(event.key.code, true);
+                break;
+
+            case sf::Event::KeyReleased:
+                mPlayer.handle_input(event.key.code, false);
+                break;
+
+            case sf::Event::Closed:
+                mWindow.close();
+                break;
+        }
+    }
+}
+
+void Application::update(const sf::Time &timePerFrame) {
+    sf::Vector2f movement(0.f, 0.f);
+    
+    if (mPlayer.movingUp)
+        movement.y -= mPlayer.mSpeed;
+    if (mPlayer.movingDown)
+        movement.y += mPlayer.mSpeed;
+    if (mPlayer.movingLeft)
+        movement.x -= mPlayer.mSpeed;
+    if (mPlayer.movingRight)
+        movement.x += mPlayer.mSpeed;
+
+    mPlayer.mSprite.move(movement * timePerFrame.asSeconds());
+}
 
 void Application::render() {
     mWindow.clear();
-    mWindow.draw(player.get_sprite());
+    mWindow.draw(mPlayer.get_sprite());
     mWindow.display();
 }

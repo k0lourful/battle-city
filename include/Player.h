@@ -1,9 +1,9 @@
-#include <SFML/System/NonCopyable.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <Tank.h>
 
 class Player : public Tank {
 public:
     Player();
 
-    void move(const sf::Event & key);
+    void handle_input(const sf::Keyboard::Key &key, const bool &isPressed);
 };
