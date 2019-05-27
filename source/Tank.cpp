@@ -1,7 +1,7 @@
 #include <Tank.h>
 
-Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file) 
-    : mX(x), mY(y), mFile(file), mDir(Up),
+Tank::Tank(const float &x, const float &y, const int &width, const int &height, const sf::String &file)
+    : mX(x), mY(y), mFile(file), movingUp(false), movingDown(false), movingLeft(false), movingRight(false),
     mSpeed(0), mCurrentFrame(0), mWidth(width), mHeight(height) {
 
     mTexture.loadFromFile(mFile);
