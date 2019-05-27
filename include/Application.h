@@ -1,19 +1,18 @@
-#include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <Player.h>
 
 class Application : private sf::NonCopyable {
 private:
     bool gameOver;
-    float time;
 
     sf::RenderWindow mWindow;
 
-    Player player;
+    Player mPlayer;
 
 public:
     Application();
 
-    void update(const float &time);
+    void process_events();
+    void update(const sf::Time &deltaTime);
     void render();
 };
