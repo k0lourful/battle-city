@@ -44,14 +44,15 @@ void Application::update(const sf::Time &timePerFrame) {
     
     if (mPlayer.movingUp)
         movement.y -= mPlayer.mSpeed;
-    if (mPlayer.movingDown)
+    else if (mPlayer.movingDown)
         movement.y += mPlayer.mSpeed;
-    if (mPlayer.movingLeft)
+    else if (mPlayer.movingLeft)
         movement.x -= mPlayer.mSpeed;
-    if (mPlayer.movingRight)
+    else if (mPlayer.movingRight)
         movement.x += mPlayer.mSpeed;
 
     mPlayer.mSprite.move(movement * timePerFrame.asSeconds());
+    mPlayer.animate(timePerFrame, movement);
 }
 
 void Application::render() {
