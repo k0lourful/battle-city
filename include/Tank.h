@@ -1,6 +1,7 @@
 #include <SFML/System/String.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/Time.hpp>
 
 class Tank : private sf::NonCopyable  {
 protected:
@@ -24,6 +25,7 @@ public:
     bool movingRight;
     sf::Sprite mSprite;
 
+    void animate(const sf::Time &time, const sf::Vector2f &movement);
     const sf::Sprite get_sprite() const;
     void set_sprite_position(const float &x, const float &y);
 };
