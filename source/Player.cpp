@@ -2,9 +2,9 @@
 #include <Player.h>
 
 Player::Player()
-    : Tank(200, 200, 13, 13, "battle-city-src/media/playerSprites.png") {
-    mSprite.setScale(4, 4);
-    mSpeed = 100.f;
+    : Tank(244, 600, 13, 13, "battle-city-src/media/playerSprites.png") {
+    mSprite.setScale(3.2f, 3.2f);
+    mSpeed = 100;
 }
 
 void Player::handle_input(const sf::Keyboard::Key &key, const bool &isPressed) {

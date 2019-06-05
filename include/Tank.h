@@ -1,15 +1,15 @@
+#pragma once
 #include <SFML/System/String.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Time.hpp>
+#include <utility>
 
 class Tank : private sf::NonCopyable  {
 protected:
-    float mX;
-    float mY;
+    std::pair<float, float> coordinates;
     int mWidth;
     int mHeight;
-    
     float mCurrentFrame;
 
     sf::String mFile;
@@ -18,7 +18,7 @@ protected:
 public:
     explicit Tank(const float &x, const float &y, const int &width, const int &height, const sf::String &file);
 
-    float mSpeed;
+    int mSpeed;
     bool movingUp;
     bool movingDown;
     bool movingLeft;
@@ -27,5 +27,6 @@ public:
 
     void animate(const sf::Time &time, const sf::Vector2f &movement);
     const sf::Sprite get_sprite() const;
-    void set_sprite_position(const float &x, const float &y);
+    void set_position(const int &x, const int &y);
+    std::pair<int, int> get_position() const;
 };

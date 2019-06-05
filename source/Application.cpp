@@ -1,8 +1,9 @@
 #include <SFML/Window/Event.hpp>
 #include <Application.h>
+#include <Map.h>
 
 Application::Application()
-    : mWindow(sf::VideoMode(960, 720), "Battle City"), gameOver(false) {
+    : mWindow(sf::VideoMode(768, 672), "Battle City"), gameOver(false) {
 
     const sf::Time timePerFrame = sf::seconds(1.f / 60.f);
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -51,12 +52,18 @@ void Application::update(const sf::Time &timePerFrame) {
     else if (mPlayer.movingRight)
         movement.x += mPlayer.mSpeed;
 
+    //mPlayer.set_position(movement.x, movement.y);
     mPlayer.mSprite.move(movement * timePerFrame.asSeconds());
     mPlayer.animate(timePerFrame, movement);
+
+    map_interaction();
 }
 
 void Application::render() {
     mWindow.clear();
+    map.draw(mWindow);
     mWindow.draw(mPlayer.get_sprite());
     mWindow.display();
 }
+
+
