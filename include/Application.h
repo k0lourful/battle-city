@@ -17,23 +17,19 @@ public:
     void process_events();
     void update(const sf::Time &deltaTime);
     void render();
-    void map_interaction() {
+    void map_interaction(sf::Vector2f &movement) {
         int x = mPlayer.get_position().first;
         int y = mPlayer.get_position().second;
 
-        for(int i = y / 24; i < (y + 28) / 24; ++i)
-            for (int j = x / 24; j < (x + 32) / 24; ++j) {
+        for(int i = (y - 24 * 2) / 24; i < (y - 24 * 2) / 24 + 1; ++i)
+            for (int j = (x - 24 * 6) / 24; j < (x - 24 * 6) / 24 + 1; ++j) {
                 char tile(map.get_tile(i, j));
 
                 if (tile >= '0' && tile <= '2') {
-                    if (mPlayer.movingDown)
-                        mPlayer.set_position(x, i * 32 - 28);
-                    if (mPlayer.movingUp)
-                        mPlayer.set_position(x, i * 32 + 32);
-                    if (mPlayer.movingRight)
-                        mPlayer.set_position(j * 32 - 32, y);
-                    if (mPlayer.movingLeft)
-                        mPlayer.set_position(j * 32 + 32, y);
+                    if (mPlayer.movingUp || mPlayer.movingDown)
+                        movement.y = 0.f;
+                    if (mPlayer.movingLeft || mPlayer.movingRight)
+                        movement.x = 0.f;
                 }
             }
     }

@@ -53,10 +53,9 @@ void Application::update(const sf::Time &timePerFrame) {
         movement.x += mPlayer.mSpeed;
 
     //mPlayer.set_position(movement.x, movement.y);
+    map_interaction(movement);
     mPlayer.mSprite.move(movement * timePerFrame.asSeconds());
     mPlayer.animate(timePerFrame, movement);
-
-    map_interaction();
 }
 
 void Application::render() {
