@@ -3,13 +3,13 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Time.hpp>
-#include <utility>
+//#include <utility>
 
 class Tank : private sf::NonCopyable  {
 protected:
-    std::pair<float, float> coordinates;
-    int mWidth;
-    int mHeight;
+    float mX, mY, mDx, mDy, mHeight, mWidth, mSpeed;
+    int mDir;
+    //std::pair<float, float> coordinates;
     float mCurrentFrame;
 
     sf::String mFile;
@@ -18,15 +18,14 @@ protected:
 public:
     explicit Tank(const float &x, const float &y, const int &width, const int &height, const sf::String &file);
 
-    int mSpeed;
-    bool movingUp;
-    bool movingDown;
-    bool movingLeft;
-    bool movingRight;
+    //bool movingUp;
+    //bool movingDown;
+    //bool movingLeft;
+    //bool movingRight;
     sf::Sprite mSprite;
 
     void animate(const sf::Time &time, const sf::Vector2f &movement);
     const sf::Sprite get_sprite() const;
     void set_position(const int &x, const int &y);
-    std::pair<int, int> get_position() const;
+    //std::pair<int, int> get_position() const;
 };
