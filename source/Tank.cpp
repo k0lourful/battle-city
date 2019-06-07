@@ -13,7 +13,7 @@ Tank::Tank(const float &x, const float &y, const int &width, const int &height, 
 void Tank::set_position(const int &x, const int &y) {
     coordinates.first = x;
     coordinates.second = y;
-    mSprite.setPosition(x, y);
+    //mSprite.setPosition(x, y);
 }
 
 const sf::Sprite Tank::get_sprite() const { return mSprite; }

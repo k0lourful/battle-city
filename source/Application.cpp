@@ -52,9 +52,9 @@ void Application::update(const sf::Time &timePerFrame) {
     else if (mPlayer.movingRight)
         movement.x += mPlayer.mSpeed;
 
-    //mPlayer.set_position(movement.x, movement.y);
     map_interaction(movement);
     mPlayer.mSprite.move(movement * timePerFrame.asSeconds());
+    mPlayer.set_position(mPlayer.mSprite.getPosition().x, mPlayer.mSprite.getPosition().y);
     mPlayer.animate(timePerFrame, movement);
 }
 
