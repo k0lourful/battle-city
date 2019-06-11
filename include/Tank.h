@@ -4,12 +4,13 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Time.hpp>
 #include <utility>
+class Map;
 
 class Tank : private sf::NonCopyable  {
 protected:
-    std::pair<float, float> coordinates;
-    int mWidth;
-    int mHeight;
+    
+    float mX, mY, mWidth, mHeight, mDx, mDy, mSpeed;
+    int mDir;
     float mCurrentFrame;
 
     sf::String mFile;
@@ -18,15 +19,11 @@ protected:
 public:
     explicit Tank(const float &x, const float &y, const int &width, const int &height, const sf::String &file);
 
-    int mSpeed;
-    bool movingUp;
-    bool movingDown;
-    bool movingLeft;
-    bool movingRight;
     sf::Sprite mSprite;
 
-    void animate(const sf::Time &time, const sf::Vector2f &movement);
+    void animate(const float &time);
     const sf::Sprite get_sprite() const;
-    void set_position(const int &x, const int &y);
-    std::pair<int, int> get_position() const;
+
+    virtual void update(const float &time, Map &map);
+    void map_interaction(Map &map);
 };
