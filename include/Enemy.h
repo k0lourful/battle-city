@@ -9,5 +9,4 @@ public:
     Enemy(const Enemy &copy) : Enemy(copy.mX, copy.mY){}
 
     void move(const sf::Int64 &time);
-    void update(const sf::Int64 &time, Map &map);
 };

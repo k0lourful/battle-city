@@ -12,11 +12,6 @@ void Enemy::move(const sf::Int64 &time) {
         mDir = rand() % 4;
         timeBeforeMoving = 0.f;
     }
-    
-}
-
-void Enemy::update(const sf::Int64 &time, Map &map) {
-    move(time);
 
     switch (mDir) {
         case 0:
@@ -41,9 +36,4 @@ void Enemy::update(const sf::Int64 &time, Map &map) {
     }
     mX += mDx * time;
     mY += mDy * time;
-
-    mSpeed = 0;
-    mSprite.setPosition(mX, mY);
-    animate(time);
-    map_interaction(map);
 }
