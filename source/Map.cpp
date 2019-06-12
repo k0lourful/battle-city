@@ -33,14 +33,14 @@ Map::Map() {
     };
 
     mTexture.loadFromFile("battle-city-src/media/groundSprites.png");
-    //mTexture.setSmooth(true);
+    mTexture.setSmooth(true);
     mSprite.setTexture(mTexture);
 }
 
 void Map::draw(sf::RenderWindow &window) {
     for (int i(0); i < HEIGHT_MAP; i++)
-        for (int j(0); j < WIDTH_MAP; j++)
-            switch(TileMap[i][j]) {
+        for (int j(0); j < WIDTH_MAP; j++) {
+            switch (TileMap[i][j]) {
                 case ' ':
                     mSprite.setTextureRect(sf::IntRect(0, 0, 24, 24));
                     break;
@@ -56,6 +56,7 @@ void Map::draw(sf::RenderWindow &window) {
                 case '2':
                     mSprite.setTextureRect(sf::IntRect(48, 0, 24, 24));
                     break;
+            }
 
             mSprite.setPosition(j * 24, i * 24);
             window.draw(mSprite);

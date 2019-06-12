@@ -6,6 +6,6 @@ class Player : public Tank {
 public:
     Player();
 
-    void update(const float &time, Map &map);
+    //void update(const sf::Int64 &time, Map &map);
     void move();
 };

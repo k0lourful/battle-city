@@ -4,9 +4,8 @@
 using sf::Keyboard;
 
 Player::Player()
-    : Tank(244, 600, 13, 13, "battle-city-src/media/playerSprites.png") {
-    mSprite.setScale(3.2f, 3.2f);
-    mSpeed = 100;
+    : Tank(244, 600, 39, 39, "battle-city-src/media/playerSprites.png") {
+    //mSpeed = 100;
 }
 
 void Player::move() {
@@ -31,35 +30,35 @@ void Player::move() {
     }
 }
 
-void Player::update(const float &time, Map &map) {
-    move();
-
-    switch (mDir) {
-        case 0:
-            mDx = mSpeed;
-            mDy = 0;
-            break;
-
-        case 1:
-            mDx = -mSpeed;
-            mDy = 0;
-            break;
-
-        case 2:
-            mDx = 0;
-            mDy = mSpeed;
-            break;
-
-        case 3:
-            mDx = 0;
-            mDy = -mSpeed;
-            break;
-    }
-    mX += mDx * time;
-    mY += mDy * time;
-
-    mSpeed = 0;
-    mSprite.setPosition(mX, mY);
-    animate(time);
-    map_interaction(map);
-}
+//void Player::update(const sf::Int64 &time, Map &map) {
+//    move();
+//
+//    switch (mDir) {
+//        case 0:
+//            mDx = mSpeed;
+//            mDy = 0;
+//            break;
+//
+//        case 1:
+//            mDx = -mSpeed;
+//            mDy = 0;
+//            break;
+//
+//        case 2:
+//            mDx = 0;
+//            mDy = mSpeed;
+//            break;
+//
+//        case 3:
+//            mDx = 0;
+//            mDy = -mSpeed;
+//            break;
+//    }
+//    mX += mDx * time;
+//    mY += mDy * time;
+//
+//    mSpeed = 0;
+//    mSprite.setPosition(mX, mY);
+//    animate(time);
+//    map_interaction(map);
+//}
