@@ -32,8 +32,9 @@ void Application::process_events() {
 }
 
 void Application::update(const sf::Int64 &time) {
-    mPlayer.update(time, map);
-    packOfEnemies[0].update(time, map);
+    const bool collision = mPlayer.get_sprite().getGlobalBounds().intersects(packOfEnemies[0].get_sprite().getGlobalBounds());
+    mPlayer.update(time, map, collision);
+    packOfEnemies[0].update(time, map, collision);
 }
 
 void Application::render() {
