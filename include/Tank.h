@@ -22,7 +22,8 @@ public:
     void animate(const sf::Int64 &time);
     const sf::Sprite get_sprite() const;
 
-    virtual void move() {}
-    virtual void update(const sf::Int64 &time, Map &map);
+    virtual void move(const sf::Int64 &time) {}
+    void update(const sf::Int64 &time, Map &map, const bool &collision);
     void map_interaction(Map &map);
+    void tank_interaction();
 };

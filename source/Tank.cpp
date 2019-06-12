@@ -28,37 +28,15 @@ void Tank::animate(const sf::Int64 &time) {
         mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 39, 39, 39));
 }
 
-void Tank::update(const sf::Int64 &time, Map &map) {
-    move();
-
-    switch (mDir) {
-        case 0:
-            mDx = mSpeed;
-            mDy = 0;
-            break;
-
-        case 1:
-            mDx = -mSpeed;
-            mDy = 0;
-            break;
-
-        case 2:
-            mDx = 0;
-            mDy = mSpeed;
-            break;
-
-        case 3:
-            mDx = 0;
-            mDy = -mSpeed;
-            break;
-    }
-    mX += mDx * time;
-    mY += mDy * time;
+void Tank::update(const sf::Int64 &time, Map &map, const bool &collision) {
+    move(time);
 
     mSpeed = 0;
     mSprite.setPosition(mX, mY);
     animate(time);
     map_interaction(map);
+
+    if (collision) tank_interaction();
 }
 
 void Tank::map_interaction(Map &map) {
@@ -81,4 +59,18 @@ void Tank::map_interaction(Map &map) {
             }
         }
 
+}
+
+void Tank::tank_interaction() {
+    if (mDy > 0.f)
+        mY -= 0.3f;
+
+    if (mDy < 0.f)
+        mY += 0.3f;
+
+    if (mDx > 0.f)
+        mX -= 0.3f;
+
+    if (mDx < 0.f)
+        mX += 0.3f;
 }
