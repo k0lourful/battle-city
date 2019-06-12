@@ -4,9 +4,7 @@
 using sf::Keyboard;
 
 Player::Player()
-    : Tank(244, 600, 39, 39, "battle-city-src/media/playerSprites.png") {
-    //mSpeed = 100;
-}
+    : Tank(244, 600, 39, 39, "battle-city-src/media/playerSprites.png") {}
 
 void Player::move() {
     if (Keyboard::isKeyPressed(Keyboard::Left)) {
