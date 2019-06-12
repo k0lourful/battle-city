@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
-//#include <iostream>
 #include <Player.h>
 #include <Enemy.h>
 #include <Map.h>
