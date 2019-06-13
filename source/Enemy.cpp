@@ -2,6 +2,8 @@
 
 Enemy::Enemy(const float &x, const float &y)
     : Tank(x, y, 39, 39, "battle-city-src/media/enemySprites.png"), timeBeforeMoving(0.f) {
+
+    bullet.playerShot = false;
 }
 
 void Enemy::move(const sf::Int64 &time) {
@@ -34,6 +36,7 @@ void Enemy::move(const sf::Int64 &time) {
             mDy = -mSpeed;
             break;
     }
+    if (mCollision) tank_interaction();
     mX += mDx * time;
     mY += mDy * time;
 }
