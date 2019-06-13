@@ -4,7 +4,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-class Map {
+class Map : private sf::NonCopyable {
 private:
     static const int HEIGHT_MAP = 28;
     static const int WIDTH_MAP = 32;
@@ -16,6 +16,7 @@ private:
 public:
     Map();
 
+    void break_wall(const int &i, const int &j);
     const char get_tile(const int &i, const int &j) { return TileMap[i][j]; }
     void draw(sf::RenderWindow &window);
 };

@@ -37,6 +37,10 @@ Map::Map() {
     mSprite.setTexture(mTexture);
 }
 
+void Map::break_wall(const int &i, const int &j) {
+    TileMap[i][j] = ' ';
+}
+
 void Map::draw(sf::RenderWindow &window) {
     for (int i(0); i < HEIGHT_MAP; i++)
         for (int j(0); j < WIDTH_MAP; j++) {
