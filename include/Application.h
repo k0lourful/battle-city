@@ -1,14 +1,16 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <Map.h>
 #include <Player.h>
 #include <Enemy.h>
-#include <Map.h>
+#include <Base.h>
 
 class Application : private sf::NonCopyable {
 private:
     bool gameOver;
 
     sf::RenderWindow mWindow;
+    Base mBase;
     Map map;
     Player mPlayer;
     Enemy *packOfEnemies;

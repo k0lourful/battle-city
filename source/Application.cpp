@@ -1,6 +1,5 @@
 #include <SFML/Window/Event.hpp>
 #include <Application.h>
-#include <Map.h>
 
 Application::Application()
     : mWindow(sf::VideoMode(768, 672), "Battle City"), gameOver(false) {
@@ -44,6 +43,7 @@ void Application::render() {
 
     mWindow.draw(packOfEnemies[0].get_sprite());
 
+    mWindow.draw(mBase.get_sprite());
     mWindow.display();
 }
 
