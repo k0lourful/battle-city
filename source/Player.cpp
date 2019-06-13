@@ -4,27 +4,30 @@
 using sf::Keyboard;
 
 Player::Player()
-    : Tank(244, 600, 39, 39, "battle-city-src/media/playerSprites.png") {}
+    : Tank(244, 600, 39, 39, "battle-city-src/media/playerSprites.png") {
+
+    bullet.playerShot = true;
+}
 
 void Player::move(const sf::Int64 &time) {
     if (Keyboard::isKeyPressed(Keyboard::Left)) {
         mDir = 1;
-        mSpeed = 0.1f;
+        mSpeed = 0.11f;
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Right)) {
         mDir = 0;
-        mSpeed = 0.1f;
+        mSpeed = 0.11f;
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Up)) {
         mDir = 3;
-        mSpeed = 0.1f;
+        mSpeed = 0.11f;
     }
 
     if (Keyboard::isKeyPressed(Keyboard::Down)) {
         mDir = 2;
-        mSpeed = 0.1f;
+        mSpeed = 0.11f;
     }
 
     switch (mDir) {
@@ -48,6 +51,19 @@ void Player::move(const sf::Int64 &time) {
             mDy = -mSpeed;
             break;
     }
+    if (mCollision) tank_interaction();
     mX += mDx * time;
     mY += mDy * time;
+}
+
+void Player::update(const sf::Int64 &time, Map &map, const bool &collision) {
+    mCollision = collision;
+    move(time);
+
+    mSpeed = 0.f;
+    mSprite.setPosition(mX, mY);
+    animate(time);
+    map_interaction(map);
+
+    bullet.update(map, time, mX, mY, mDir);
 }
