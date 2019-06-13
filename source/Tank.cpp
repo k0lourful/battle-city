@@ -2,8 +2,9 @@
 #include <Map.h>
 
 Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file)
-    : mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0),
-    mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height) {
+    : mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
+    mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height), 
+    bullet(x, y, false) {
 
     mTexture.loadFromFile(mFile);
     mSprite.setTexture(mTexture);
@@ -29,14 +30,15 @@ void Tank::animate(const sf::Int64 &time) {
 }
 
 void Tank::update(const sf::Int64 &time, Map &map, const bool &collision) {
+    mCollision = collision;
     move(time);
 
-    mSpeed = 0;
+    mSpeed = 0.f;
     mSprite.setPosition(mX, mY);
     animate(time);
     map_interaction(map);
 
-    if (collision) tank_interaction();
+    bullet.update(map, time, mX, mY, mDir);
 }
 
 void Tank::map_interaction(Map &map) {

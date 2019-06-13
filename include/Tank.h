@@ -2,6 +2,7 @@
 #include <SFML/System/String.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <Bullet.h>
 #include <utility>
 class Map;
 
@@ -10,9 +11,12 @@ protected:
     float mX, mY, mWidth, mHeight, mDx, mDy, mSpeed;
     int mDir;
     float mCurrentFrame;
+    bool mCollision;
 
     sf::String mFile;
     sf::Texture mTexture;
+
+    Bullet bullet;
 
 public:
     explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file);
