@@ -61,7 +61,7 @@ void Bullet::map_interaction(Map &map) {
         for (int j = mX / 24; j < (mX + 9) / 24; ++j) {
             char tile = map.get_tile(i, j);
 
-            if (tile == '0' && tile == '2')
+            if (tile == '0' || tile == '2')
                 present = false;
 
             if (tile == '1') {
