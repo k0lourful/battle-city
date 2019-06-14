@@ -2,7 +2,7 @@
 #include <Map.h>
 
 Bullet::Bullet(const float &x, const float &y, const bool &playerShot)
-    : present(false), mX(x), mY(y), mDir(0), mDx(0.f), mDy(0.f) {
+    : present(false), mX(x), mY(y), mDir(0), mDx(0.f), mDy(0.f), timeBeforeShot(0.f) {
 
     this->playerShot = playerShot;
 
@@ -15,26 +15,26 @@ Bullet::Bullet(const float &x, const float &y, const bool &playerShot)
 void Bullet::move(const sf::Int64 &time) {
     switch (mDir) {
         case 0:
-            mDx = 0.2f;
+            mDx = 0.3f;
             mDy = 0;
 			mSprite.setRotation(90.f);
             break;
 
         case 1:
-            mDx = -0.2f;
+            mDx = -0.3f;
             mDy = 0;
 			mSprite.setRotation(-90.f);
             break;
 
         case 2:
             mDx = 0;
-            mDy = 0.2f;
+            mDy = 0.3f;
 			mSprite.setRotation(180.f);
             break;
 
         case 3:
             mDx = 0;
-            mDy = -0.2f;
+            mDy = -0.3f;
 			mSprite.setRotation(0.f);
             break;
     }

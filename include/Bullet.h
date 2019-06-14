@@ -5,8 +5,6 @@ class Map;
 
 class Bullet {
 private:
-	bool collision;
-    
     float mX, mY, mDx, mDy;
     int mDir;
 
@@ -15,6 +13,7 @@ private:
 public:
     bool present; //is it shot?
     bool playerShot; //is it player's bullet?
+    float timeBeforeShot;
 	sf::Sprite mSprite;
 
     explicit Bullet(const float &x, const float &y, const bool &playerShot);
