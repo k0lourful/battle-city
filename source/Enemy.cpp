@@ -1,7 +1,7 @@
 #include <Enemy.h>
 
 Enemy::Enemy(const float &x, const float &y)
-    : Tank(x, y, 39, 39, "battle-city-src/media/enemySprites.png"), timeBeforeMoving(0.f) {
+    : Tank(x, y, 39, 39, "battle-city-src/media/enemySprites.png"), timeBeforeMoving(0.f), timeBeforeShot(0.f) {
 
     bullet.playerShot = false;
 }
@@ -10,7 +10,7 @@ void Enemy::move(const sf::Int64 &time) {
     mSpeed = 0.1f;
     timeBeforeMoving += time;
 
-    if (timeBeforeMoving > 1500) {
+    if (timeBeforeMoving > 1000 + rand() % 501) {
         mDir = rand() % 4;
         timeBeforeMoving = 0.f;
     }
@@ -39,4 +39,29 @@ void Enemy::move(const sf::Int64 &time) {
     if (mCollision) tank_interaction();
     mX += mDx * time;
     mY += mDy * time;
+}
+
+void Enemy::shoot(const float &time) {
+    timeBeforeShot += time;
+
+    if (timeBeforeShot > 1000.f) {
+        if (!bullet.present)
+            if (rand() % 2)
+                bullet.present = true;
+
+        timeBeforeShot = 0.f;
+    }
+}
+
+void Enemy::update(const sf::Int64 &time, Map &map, const bool &collision) {
+    mCollision = collision;
+    move(time);
+
+    mSpeed = 0.f;
+    mSprite.setPosition(mX, mY);
+    animate(time);
+    map_interaction(map);
+
+    bullet.update(map, time, mX, mY, mDir);
+    shoot(time);
 }
