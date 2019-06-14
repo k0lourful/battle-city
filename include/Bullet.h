@@ -5,21 +5,22 @@ class Map;
 
 class Bullet {
 private:
-    bool present; //is it shot?
+	bool collision;
     
     float mX, mY, mDx, mDy;
     int mDir;
 
     sf::Texture mTexture;
-    sf::Sprite mSprite;
 
 public:
+    bool present; //is it shot?
     bool playerShot; //is it player's bullet?
+	sf::Sprite mSprite;
 
     explicit Bullet(const float &x, const float &y, const bool &playerShot);
 
+	void shoot() { present = true; }
     void move(const sf::Int64 &time);
-    void set_position(const float &x, const float &y);
     void update(Map &map, const sf::Int64 &time, float &x, const float &y, const int &dir);
     void map_interaction(Map &map);
 };
