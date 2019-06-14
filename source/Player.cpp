@@ -64,6 +64,14 @@ void Player::update(const sf::Int64 &time, Map &map, const bool &collision) {
     mSprite.setPosition(mX, mY);
     animate(time);
     map_interaction(map);
-	if (Keyboard::isKeyPressed(Keyboard::Space)) bullet.shoot();
+
     bullet.update(map, time, mX, mY, mDir);
+    if (!bullet.present)
+        if (Keyboard::isKeyPressed(Keyboard::Space)) {
+            bullet.timeBeforeShot += time;
+            if (bullet.timeBeforeShot > 10.f) {
+                bullet.present = true;
+                bullet.timeBeforeShot = 0.f;
+            }
+        }
 }
