@@ -19,14 +19,15 @@ protected:
 public:
     explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file);
 
+    bool life;
+
 	Bullet bullet;
     sf::Sprite mSprite;
 
     void animate(const sf::Int64 &time);
-    const sf::Sprite get_sprite() const;
 
+    void collapse();
     virtual void move(const sf::Int64 &time) {}
-    void update(const sf::Int64 &time, Map &map, const bool &collision);
     void map_interaction(Map &map);
     void tank_interaction();
 };

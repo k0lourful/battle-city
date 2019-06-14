@@ -2,7 +2,7 @@
 #include <Map.h>
 
 Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file)
-    : mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
+    : life(true), mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
     mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height), 
     bullet(x, y, false) {
 
@@ -11,8 +11,6 @@ Tank::Tank(const float &x, const float &y, const float &width, const float &heig
     mSprite.setTextureRect(sf::IntRect(78, 39, mWidth, mHeight));
     mSprite.setPosition(x, y);
 }
-
-const sf::Sprite Tank::get_sprite() const { return mSprite; }
 
 void Tank::animate(const sf::Int64 &time) {
     mCurrentFrame += 0.005f * time;
@@ -29,16 +27,10 @@ void Tank::animate(const sf::Int64 &time) {
         mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 39, 39, 39));
 }
 
-void Tank::update(const sf::Int64 &time, Map &map, const bool &collision) {
-    mCollision = collision;
-    move(time);
-
-    mSpeed = 0.f;
-    mSprite.setPosition(mX, mY);
-    animate(time);
-    map_interaction(map);
-
-    bullet.update(map, time, mX, mY, mDir);
+void Tank::collapse() {
+    life = false;
+    bullet.present = false;
+    mSprite.setPosition(0, 0);
 }
 
 void Tank::map_interaction(Map &map) {
