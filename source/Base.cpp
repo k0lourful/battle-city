@@ -1,8 +1,7 @@
 #include <Base.h>
 
 Base::Base()
-    : destroyed(false) {
-
+    : life(true) {
     mTexture.loadFromFile("battle-city-src/media/baseSprite.png");
     mSprite.setTexture(mTexture);
     mSprite.setTextureRect(sf::IntRect(0, 0, 48, 48));

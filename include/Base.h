@@ -4,13 +4,11 @@
 
 class Base : private sf::NonCopyable {
 private:
-    bool destroyed;
-
     sf::Texture mTexture;
-    sf::Sprite mSprite;
 
 public:
-    Base();
+    sf::Sprite mSprite;
+    bool life;
 
-    sf::Sprite get_sprite() const { return mSprite; }
+    Base();
 };
