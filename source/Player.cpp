@@ -64,6 +64,6 @@ void Player::update(const sf::Int64 &time, Map &map, const bool &collision) {
     mSprite.setPosition(mX, mY);
     animate(time);
     map_interaction(map);
-	if (Keyboard::isKeyPressed(Keyboard::Space)) bullet.shoot();
+
     bullet.update(map, time, mX, mY, mDir);
 }

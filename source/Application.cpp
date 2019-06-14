@@ -40,7 +40,6 @@ void Application::render() {
     mWindow.clear();
     map.draw(mWindow);
     mWindow.draw(mPlayer.get_sprite());
-    if(mPlayer.bullet.present) mWindow.draw(mPlayer.bullet.mSprite);
 
     mWindow.draw(packOfEnemies[0].get_sprite());
 

@@ -12,67 +12,47 @@ Bullet::Bullet(const float &x, const float &y, const bool &playerShot)
     mSprite.setPosition(x, y);
 }
 
+void Bullet::set_position(const float &x, const float &y) {
+    mX = x;
+    mY = y;
+}
+
 void Bullet::move(const sf::Int64 &time) {
     switch (mDir) {
         case 0:
             mDx = 0.2f;
             mDy = 0;
-			mSprite.setRotation(90.f);
             break;
 
         case 1:
             mDx = -0.2f;
             mDy = 0;
-			mSprite.setRotation(-90.f);
             break;
 
         case 2:
             mDx = 0;
             mDy = 0.2f;
-			mSprite.setRotation(180.f);
             break;
 
         case 3:
             mDx = 0;
             mDy = -0.2f;
-			mSprite.setRotation(0.f);
             break;
     }
 
     mX += mDx * time;
     mY += mDy * time;
-	mSprite.setPosition(mX, mY);
 }
 
 void Bullet::update(Map &map, const sf::Int64 &time, float &x, const float &y, const int &dir) {
+    mDir = dir;
+
     if (present) {
         move(time);
         map_interaction(map);
     }
     else {
-		mDir = dir;
-        switch (mDir) {
-        case 0:
-            mX = x + 35.f;
-            mY = y + 15.f;
-            break;
 
-        case 1:
-            mX = x + 7.f;
-            mY = y + 23.f;
-            break;
-
-        case 2:
-            mX = x + 23.f;
-            mY = y + 32.f;
-            break;
-
-        case 3:
-            mX = x + 15.f;
-            mY = y + 5.f;
-            break;
-        }
-		mSprite.setPosition(mX, mY);
     }
 }
 

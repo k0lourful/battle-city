@@ -16,10 +16,11 @@ protected:
     sf::String mFile;
     sf::Texture mTexture;
 
+    Bullet bullet;
+
 public:
     explicit Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file);
 
-	Bullet bullet;
     sf::Sprite mSprite;
 
     void animate(const sf::Int64 &time);
