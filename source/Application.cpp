@@ -66,7 +66,7 @@ void Application::update(const sf::Int64 &time) {
         if (packOfEnemies[i].life) {
             packOfEnemies[i].update(time, map, collision);
 
-            if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mPlayer.bullet.mSprite.getGlobalBounds())
+            if (packOfEnemies[i].bullet.mSprite.getGlobalBounds().intersects(mPlayer.mSprite.getGlobalBounds())
                 && packOfEnemies[i].bullet.present) {
                 mPlayer.collapse();
                 packOfEnemies[i].bullet.present = false;
