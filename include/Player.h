@@ -6,5 +6,6 @@ class Player : public Tank {
 public:
     Player();
 
-    void handle_input(const sf::Keyboard::Key &key, const bool &isPressed);
+    void move(const sf::Int64 &time);
+    void update(const sf::Int64 &time, Map &map, const bool &collision);
 };

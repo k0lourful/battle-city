@@ -1,35 +1,70 @@
 #include <Tank.h>
+#include <Map.h>
 
-Tank::Tank(const float &x, const float &y, const int &width, const int &height, const sf::String &file)
-    : mX(x), mY(y), mFile(file), mDx(0.f), mDy(0.f), mDir(0),
-    mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height) {
+Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file)
+    : life(true), mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
+    mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height), 
+    bullet(x, y) {
 
     mTexture.loadFromFile(mFile);
     mSprite.setTexture(mTexture);
-    mSprite.setTextureRect(sf::IntRect(26, 13, mWidth, mHeight));
+    mSprite.setTextureRect(sf::IntRect(78, 39, mWidth, mHeight));
     mSprite.setPosition(x, y);
 }
 
-void Tank::set_position(const int &x, const int &y) {
-    coordinates.first = x;
-    coordinates.second = y;
-}
-
-const sf::Sprite Tank::get_sprite() const { return mSprite; }
-
-void Tank::animate(const sf::Time &time, const sf::Vector2f &movement) {
-    mCurrentFrame += 0.00001f * time.asMicroseconds();
+void Tank::animate(const sf::Int64 &time) {
+    mCurrentFrame += 0.005f * time;
     if (mCurrentFrame >= 2)
         mCurrentFrame -= 2;
 
-    if (movement.x > 0.01f)
-        mSprite.setTextureRect(sf::IntRect(0 + 13 * (int)mCurrentFrame, 0, 13, 13));
-    else if (movement.x < -0.01f)
-        mSprite.setTextureRect(sf::IntRect(26 + 13 * (int)mCurrentFrame, 0, 13, 13));
-    else if (movement.y > 0.01f)
-        mSprite.setTextureRect(sf::IntRect(0 + 13 * (int)mCurrentFrame, 13, 13, 13));
-    else if (movement.y < -0.01f)
-        mSprite.setTextureRect(sf::IntRect(26 + 13 * (int)mCurrentFrame, 13, 13, 13));
+    if (mDx > 0.f)
+        mSprite.setTextureRect(sf::IntRect(0 + 39 * (int)mCurrentFrame, 0, 39, 39));
+    if (mDx < 0.f)
+        mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 0, 39, 39));
+    if (mDy > 0.0f)
+        mSprite.setTextureRect(sf::IntRect(0 + 39 * (int)mCurrentFrame, 39, 39, 39));
+    if (mDy < 0.0f)
+        mSprite.setTextureRect(sf::IntRect(78 + 39 * (int)mCurrentFrame, 39, 39, 39));
 }
 
-//std::pair<int, int> Tank::get_position() const { return coordinates; }
+void Tank::collapse() {
+    life = false;
+    bullet.present = false;
+    mSprite.setPosition(0, 0);
+}
+
+void Tank::map_interaction(Map &map) {
+    for (int i = mY / 24; i < (mY + mHeight) / 24; ++i)
+        for (int j = mX / 24; j < (mX + mWidth) / 24; ++j) {
+            char tile = map.get_tile(i, j);
+
+            if (tile >= '0' && tile <= '2') {
+                if (mDy > 0.f)
+                    mY = i * 24 - mHeight;
+
+                if (mDy < 0.f)
+                    mY = (float)i * 24 + 24;
+
+                if (mDx > 0.f)
+                    mX = j * 24 - mWidth;
+
+                if (mDx < 0.f)
+                    mX = (float)j * 24 + 24;
+            }
+        }
+
+}
+
+void Tank::tank_interaction() {
+    if (mDy > 0.f)
+        mY -= 0.3f;
+
+    if (mDy < 0.f)
+        mY += 0.3f;
+
+    if (mDx > 0.f)
+        mX -= 0.3f;
+
+    if (mDx < 0.f)
+        mX += 0.3f;
+}

@@ -1,44 +1,33 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <iostream>
-#include <Player.h>
 #include <Map.h>
+#include <Player.h>
+#include <Enemy.h>
+#include <Base.h>
+#include <Message.h>
 
 class Application : private sf::NonCopyable {
 private:
     bool gameOver;
+    bool gameStarted;
+
+    int frags;
 
     sf::RenderWindow mWindow;
+    Base mBase;
     Map map;
     Player mPlayer;
+    Enemy *packOfEnemies;
+
+    Message msgStart;
+    Message msgOver;
+    Message msgLost;
+    Message msgWon;
 
 public:
     Application();
 
     void process_events();
-    void update(const sf::Time &deltaTime);
+    void update(const sf::Int64 &time);
     void render();
-    void map_interaction(sf::Vector2f &movement) {
-        int x = mPlayer.get_position().first;
-        int y = mPlayer.get_position().second;
-
-        std::cout << x << " " << y << std::endl;
-
-        for(int i = (y - 24) / 24; i < (y - 24 + 13) / 24; ++i)
-            for (int j = (x - 24 * 2) / 24; j < (x - 24 * 2 + 13) / 24; ++j) {
-                char tile(map.get_tile(i, j));
-                std::cout << tile << std::endl;
-
-                if (tile == '0' || tile == '1' || tile == '2') {
-                    if (mPlayer.movingUp)
-                        movement.y = 0.f;
-                    if (mPlayer.movingDown)
-                        movement.y = 0.f;
-                    if (mPlayer.movingLeft)
-                        movement.x = 0.f;
-                    if (mPlayer.movingRight)
-                        movement.x = 0.f;
-                }
-            }
-    }
 };
