@@ -6,7 +6,6 @@ using sf::Keyboard;
 Player::Player()
     : Tank(244, 600, 39, 39, "battle-city-src/media/playerSprites.png") {
 
-    bullet.playerShot = true;
 }
 
 void Player::move(const sf::Int64 &time) {

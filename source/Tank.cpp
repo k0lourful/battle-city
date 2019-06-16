@@ -4,7 +4,7 @@
 Tank::Tank(const float &x, const float &y, const float &width, const float &height, const sf::String &file)
     : life(true), mX(x), mY(y), mDx(0.f), mDy(0.f), mFile(file), mDir(0), mCollision(false),
     mCurrentFrame(0.f), mSpeed(0.f), mWidth(width), mHeight(height), 
-    bullet(x, y, false) {
+    bullet(x, y) {
 
     mTexture.loadFromFile(mFile);
     mSprite.setTexture(mTexture);

@@ -1,10 +1,8 @@
 #include <Bullet.h>
 #include <Map.h>
 
-Bullet::Bullet(const float &x, const float &y, const bool &playerShot)
+Bullet::Bullet(const float &x, const float &y)
     : present(false), mX(x), mY(y), mDir(0), mDx(0.f), mDy(0.f), timeBeforeShot(0.f) {
-
-    this->playerShot = playerShot;
 
     mTexture.loadFromFile("battle-city-src/media/bulletSprite.png");
     mSprite.setTexture(mTexture);

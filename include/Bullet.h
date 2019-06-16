@@ -12,11 +12,10 @@ private:
 
 public:
     bool present; //is it shot?
-    bool playerShot; //is it player's bullet?
     float timeBeforeShot;
 	sf::Sprite mSprite;
 
-    explicit Bullet(const float &x, const float &y, const bool &playerShot);
+    explicit Bullet(const float &x, const float &y);
 
 	void shoot() { present = true; }
     void move(const sf::Int64 &time);
