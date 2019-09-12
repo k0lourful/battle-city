@@ -1,8 +1,12 @@
 #include <SFML/Window/Event.hpp>
 #include <Application.h>
+#define MAX_WINDOW_WIDTH     720
+#define MAX_WINDOW_HEIGHT    672
+//etc
+
 
 Application::Application()
-    : mWindow(sf::VideoMode(720, 672), "Battle City"), gameOver(false), gameStarted(false),
+    : mWindow(sf::VideoMode(MAX_WINDOW_WIDTH, MAX_WINDOW_HEIGHT), "Battle City"), gameOver(false), gameStarted(false),
     msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
     msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0) {
 
