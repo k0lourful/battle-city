@@ -2,14 +2,17 @@
 #include <Application.h>
 
 Application::Application()
+     // This piece of code is used to create objects
+    //  It would be necessary to replace the logic of creating objects with a separate method(void init() for example)    
     : mWindow(sf::VideoMode(720, 672), "Battle City"), gameOver(false), gameStarted(false),
     msgStart(90, 330, "Press \'Enter\' to start"), msgOver(250, 300, "Game over"),
     msgLost(260, 350, "You lost"), msgWon(265, 350, "You won"), frags(0) {
 
     sf::Clock clock;
-
+                                     // Magic variables ♥
     packOfEnemies = new Enemy[4]{ Enemy(52,31), Enemy(147,391), Enemy(532,391), Enemy(628,31) };
 
+    // This piece of code is responsible for the logic. It should separate business logic from object creation
     while (mWindow.isOpen()) {
         sf::Int64 time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
